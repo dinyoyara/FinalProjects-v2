@@ -1,7 +1,7 @@
 import { ObjectType, Field, ID, Directive } from '@nestjs/graphql';
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'customers' })
 @ObjectType()
 @Directive('@key(fields: "id")')
 export class Customer {
@@ -18,6 +18,6 @@ export class Customer {
     email: string;
 
     @Column()
-    @Field({ description: 'Customer passport', nullable: false })
-    passport: string;
+    @Field({ description: 'Customer password', nullable: false })
+    password: string;
 }

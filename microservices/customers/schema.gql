@@ -12,21 +12,38 @@ type Customer {
   """Customer email"""
   email: String!
 
-  """Customer passport"""
-  passport: String!
+  """Customer password"""
+  password: String!
+}
+
+type Token {
+  """Token value"""
+  token: String!
 }
 
 type Mutation {
-  singup(createCustomerInput: CreateCustomerInput!): Customer!
+  singup(singupInput: SingupInput!): Customer!
+  singin(singinInput: SinginInput!): Token!
 }
 
-input CreateCustomerInput {
+input SingupInput {
   """Customer name"""
   name: String!
 
   """Customer email"""
   email: String!
 
-  """Customer passport"""
-  passport: String!
+  """Password passport"""
+  password: String!
+}
+
+input SinginInput {
+  """Customer name"""
+  name: String
+
+  """Customer email"""
+  email: String!
+
+  """Customer password"""
+  password: String!
 }
