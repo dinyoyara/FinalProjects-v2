@@ -1,0 +1,32 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Customer {
+  """Customer unique identifier"""
+  id: ID!
+
+  """Customer name"""
+  name: String!
+
+  """Customer email"""
+  email: String!
+
+  """Customer passport"""
+  passport: String!
+}
+
+type Mutation {
+  singup(createCustomerInput: CreateCustomerInput!): Customer!
+}
+
+input CreateCustomerInput {
+  """Customer name"""
+  name: String!
+
+  """Customer email"""
+  email: String!
+
+  """Customer passport"""
+  passport: String!
+}
