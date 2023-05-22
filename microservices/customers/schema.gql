@@ -33,14 +33,11 @@ input SingupInput {
   """Customer email"""
   email: String!
 
-  """Password passport"""
+  """Customer password"""
   password: String!
 }
 
 input SinginInput {
-  """Customer name"""
-  name: String
-
   """Customer email"""
   email: String!
 
