@@ -1,0 +1,52 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Customer {
+  id: ID!
+  warehouses: [Warehouse!]!
+}
+
+type Warehouse {
+  """Warehouse unique identifier"""
+  id: ID!
+
+  """Warehouse name"""
+  name: String!
+
+  """Warehouse type"""
+  type: String!
+
+  """Warehouse size"""
+  size: Float!
+
+  """Warehouse owner id"""
+  customerId: String!
+  customer: Customer!
+  author: Customer!
+}
+
+type Query {
+  warehouse(id: String!): Warehouse!
+  warehouses: [Warehouse!]!
+}
+
+type Mutation {
+  createWarehouse(createWarehouseInput: CreateWarehouseInput!): Warehouse!
+  updateWarehouse(updateWarehouseInput: UpdateWarehouseInput!): Warehouse!
+  deleteWarehouse(id: String!): Warehouse!
+}
+
+input CreateWarehouseInput {
+  name: String!
+  type: String!
+  size: Float!
+}
+
+input UpdateWarehouseInput {
+  id: String!
+  name: String!
+  type: String!
+  size: Float!
+  customerId: String!
+}
