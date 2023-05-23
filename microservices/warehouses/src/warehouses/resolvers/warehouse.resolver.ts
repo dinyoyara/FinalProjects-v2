@@ -37,7 +37,7 @@ export class WarehousesResolver {
     }
 
     @ResolveField(() => Customer)
-    author(@Parent() warehouse: Warehouse): any {
+    customer(@Parent() warehouse: Warehouse): any {
         return {
             _typeName: 'Customer',
             id: warehouse.customerId

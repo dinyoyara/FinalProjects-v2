@@ -23,7 +23,6 @@ type Warehouse {
   """Warehouse owner id"""
   customerId: String!
   customer: Customer!
-  author: Customer!
 }
 
 type Query {

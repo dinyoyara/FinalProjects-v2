@@ -35,5 +35,5 @@ export class Warehouse {
     customerId: string;
 
     @Field((type) => Customer)
-    customer: Customer;
+    customer?: Customer;
 }

@@ -9,7 +9,7 @@ export class UsersResolver {
     constructor(private readonly warehouseService: WarehousesService) {}
 
     @ResolveField(() => [Warehouse])
-    posts(@Parent() customer: Customer) {
+    warehouses(@Parent() customer: Customer) {
         return this.warehouseService.findAllByCustomerAsync(customer.id);
     }
 }

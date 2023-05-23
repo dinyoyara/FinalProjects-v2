@@ -21,7 +21,7 @@ export class CustomersResolver {
     }
 
     @ResolveReference()
-    resolveReference(@Args('reference') reference: { _typename: string; id: string }): Promise<Customer> {
+    resolveReference(reference: { _typename: string; id: string }): Promise<Customer> {
         return this.customerService.findOne(reference.id);
     }
 }
