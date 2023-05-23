@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  """Product unique identifier"""
+  id: ID!
+
+  """Product name"""
+  name: String!
+
+  """Product type"""
+  type: String!
+
+  """Product size"""
+  size: Float!
+
+  """Product price"""
+  price: Float!
+}
+
+type Query {
+  products: [Product!]!
+  product(id: String!): Product!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+}
+
+input CreateProductInput {
+  """Product name"""
+  name: String!
+
+  """Product type"""
+  type: String!
+
+  """Product size"""
+  size: Float!
+
+  """Product price"""
+  price: Float!
+}
