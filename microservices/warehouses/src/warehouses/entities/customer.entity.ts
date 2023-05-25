@@ -9,5 +9,5 @@ export class Customer {
     id: string;
 
     @Field((type) => [Warehouse])
-    warehouses?: Warehouse[];
+    warehouses: Warehouse[];
 }

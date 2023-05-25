@@ -20,6 +20,7 @@ export class WarehousesService {
     };
 
     findOneAsync = (id: string): Promise<Warehouse> => {
+        if (!id) return null;
         return this.warehousesRepo.findOne({ where: { id } });
     };
 

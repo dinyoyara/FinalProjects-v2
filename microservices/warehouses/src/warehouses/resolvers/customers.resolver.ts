@@ -8,7 +8,7 @@ import { WarehousesService } from '../warehouses.service';
 export class UsersResolver {
     constructor(private readonly warehouseService: WarehousesService) {}
 
-    @ResolveField(() => [Warehouse])
+    @ResolveField(() => [Warehouse!]!)
     warehouses(@Parent() customer: Customer) {
         return this.warehouseService.findAllByCustomerAsync(customer.id);
     }

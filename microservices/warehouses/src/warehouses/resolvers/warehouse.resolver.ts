@@ -41,7 +41,7 @@ export class WarehousesResolver {
         return this.warehouseService.findAllByCustomerAsync(customerId);
     }
 
-    @ResolveField(() => Customer)
+    @ResolveField(() => Customer!)
     customer(@Parent() warehouse: Warehouse): any {
         return {
             _typeName: 'Customer',
@@ -49,12 +49,12 @@ export class WarehousesResolver {
         };
     }
 
-    @ResolveField(() => [Movement])
+    @ResolveField(() => [Movement!]!)
     exportedMovements(@Parent() warehouse: Warehouse) {
         return this.movementsService.findAllExportedByWarehouseAsync(warehouse.id);
     }
 
-    @ResolveField(() => [Movement])
+    @ResolveField(() => [Movement!]!)
     importedMovements(@Parent() warehouse: Warehouse) {
         return this.movementsService.findAllImportedByWarehouseAsync(warehouse.id);
     }

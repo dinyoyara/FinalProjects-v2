@@ -9,5 +9,5 @@ export class Product {
     id: string;
 
     @Field((type) => [Movement])
-    movements?: Movement[];
+    movements: Movement[];
 }

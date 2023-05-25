@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Product {
+  id: ID!
+  movements: [Movement!]!
+}
+
 type Customer {
   id: ID!
   warehouses: [Warehouse!]!
@@ -23,7 +28,35 @@ type Warehouse {
   """Warehouse owner id"""
   customerId: String!
   customer: Customer!
+  exportedMovements: [Movement!]!
+  importedMovements: [Movement!]!
 }
+
+type Movement {
+  """Movement unique identifier"""
+  id: ID!
+
+  """Date of the movement"""
+  date: DateTime!
+  productCount: Float!
+
+  """Id of the moved product"""
+  productId: String!
+  product: Product!
+
+  """Id of the exported warehouse"""
+  exportedWarehouseId: String
+  exportedWarehouse: Warehouse
+
+  """Id of the imported warehouse"""
+  importedWarehouseId: String
+  importedWarehouse: Warehouse
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Query {
   warehouse(id: String!): Warehouse!
@@ -34,6 +67,7 @@ type Mutation {
   createWarehouse(createWarehouseInput: CreateWarehouseInput!): Warehouse!
   updateWarehouse(updateWarehouseInput: UpdateWarehouseInput!): Warehouse!
   deleteWarehouse(id: String!): Warehouse!
+  createMovement(createMovementInput: CreateMovementInput!): Movement!
 }
 
 input CreateWarehouseInput {
@@ -48,4 +82,19 @@ input UpdateWarehouseInput {
   type: String!
   size: Float!
   customerId: String!
+}
+
+input CreateMovementInput {
+  """Date of the movement"""
+  date: DateTime!
+  productCount: Float!
+
+  """Id of the moved product"""
+  productId: String!
+
+  """Id of the exported warehouse"""
+  exportedWarehouseId: String
+
+  """Id of the imported warehouse"""
+  importedWarehouseId: String
 }

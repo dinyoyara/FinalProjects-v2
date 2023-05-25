@@ -4,6 +4,7 @@ import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm';
 import { HAZARDOUS, NON_HAZARDOUS, UNKNOWN } from '../../constants';
 import { Customer } from './customer.entity';
 import { Movement } from 'src/movements/entities/movement.entity';
+import { type } from 'os';
 
 @Entity({ name: 'warehouses' })
 @ObjectType()
@@ -29,18 +30,18 @@ export class Warehouse {
     @Field({ description: 'Warehouse size' })
     size: number;
 
-    @Column({ type: 'uuid' })
+    @Column()
     @Field({ description: 'Warehouse owner id' })
     customerId: string;
 
     @Field((type) => Customer)
-    customer?: Customer;
+    customer: Customer;
 
     @OneToMany((type) => Movement, (movement) => movement.exportedWarehouse)
-    @Field()
+    @Field((type) => [Movement])
     exportedMovements: Movement[];
 
     @OneToMany((type) => Movement, (movement) => movement.importedWarehouse)
-    @Field()
+    @Field((type) => [Movement])
     importedMovements: Movement[];
 }

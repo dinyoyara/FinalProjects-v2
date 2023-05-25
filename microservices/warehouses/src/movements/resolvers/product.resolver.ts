@@ -8,7 +8,7 @@ import { Movement } from '../entities/movement.entity';
 export class UsersResolver {
     constructor(private readonly movementsService: MovementsService) {}
 
-    @ResolveField(() => [Movement])
+    @ResolveField(() => [Movement!]!)
     movements(@Parent() product: Product) {
         return this.movementsService.findAllByProductAsync(product.id);
     }

@@ -3,7 +3,6 @@ import { ObjectType, Field, Directive, ID } from '@nestjs/graphql';
 
 import { Product } from './product.entity';
 import { Warehouse } from '../../warehouses/entities/warehouse.entity';
-import { type } from 'os';
 
 @Entity({ name: 'movements' })
 @ObjectType()
@@ -22,25 +21,28 @@ export class Movement {
     productCount: number;
 
     @Column()
-    @Field((type) => ID, { description: 'Id of the moved product' })
+    @Field({ description: 'Id of the moved product' })
     productId: string;
 
     @Field((type) => Product)
-    product?: Product;
+    product: Product;
 
-    @Column({ type: 'uuid' })
-    @Field((type) => ID, { description: 'Id of the exported warehouse' })
+    @Column({ nullable: true })
+    @Field({ description: 'Id of the exported warehouse', nullable: true })
     exportedWarehouseId: string;
 
-    @ManyToOne((type) => Warehouse, (warehouse) => warehouse.exportedMovements)
-    @Field((type) => Warehouse)
-    exportedWarehouse?: Warehouse;
+    @ManyToOne((type) => Warehouse, (warehouse) => warehouse.exportedMovements, {
+        onDelete: 'SET NULL',
+        nullable: true
+    })
+    @Field((type) => Warehouse, { nullable: true })
+    exportedWarehouse: Warehouse;
 
-    @Column({ type: 'uuid' })
-    @Field((type) => ID, { description: 'Id of the imported warehouse' })
+    @Column({ nullable: true })
+    @Field({ description: 'Id of the imported warehouse', nullable: true })
     importedWarehouseId: string;
 
-    @ManyToOne((type) => Warehouse, (warehouse) => warehouse.importedMovements)
-    @Field((type) => Warehouse)
-    importedWarehouse?: Warehouse;
+    @ManyToOne((type) => Warehouse, (warehouse) => warehouse.importedMovements, { onDelete: 'SET NULL' })
+    @Field((type) => Warehouse, { nullable: true })
+    importedWarehouse: Warehouse;
 }

@@ -1,4 +1,5 @@
 import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
+
 import { Product } from '../entities/product.entity';
 import { Movement } from '../entities/movement.entity';
 import { MovementsService } from '../movements.service';
@@ -24,17 +25,17 @@ export class MovementsResolver {
     // }
 
     @ResolveField(() => Warehouse)
-    exportedWarehouse(@Parent() movement: Movement): any {
+    exportedWarehouse(@Parent() movement: Movement): Promise<Warehouse> {
         return this.warehouseService.findOneAsync(movement.exportedWarehouseId);
     }
 
     @ResolveField(() => Warehouse)
-    importedWarehouse(@Parent() movement: Movement): any {
+    importedWarehouse(@Parent() movement: Movement): Promise<Warehouse> {
         return this.warehouseService.findOneAsync(movement.importedWarehouseId);
     }
 
-    @ResolveField(() => Product)
-    product(@Parent() movement: Movement) {
+    @ResolveField(() => Product!)
+    product(@Parent() movement: Movement): any {
         return {
             _typeName: 'Product',
             id: movement.productId
