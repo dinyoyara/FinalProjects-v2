@@ -8,6 +8,7 @@ import { Movement } from './entities/movement.entity';
 export class MovementsService {
     constructor(@InjectRepository(Movement) private readonly movementsRepo: Repository<Movement>) {}
 
+    //??? TODO Research for server validation when information providers are deferent services ???
     createAsync = (input: CreateMovementInput): Promise<Movement> => {
         const newMovement = this.movementsRepo.create(input);
         return this.movementsRepo.save(newMovement);
