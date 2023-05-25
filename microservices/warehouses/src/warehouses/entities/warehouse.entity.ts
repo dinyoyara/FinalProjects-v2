@@ -1,8 +1,9 @@
-import { ObjectType, Field, Int, Directive, ID } from '@nestjs/graphql';
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { ObjectType, Field, Directive, ID } from '@nestjs/graphql';
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm';
 
 import { HAZARDOUS, NON_HAZARDOUS, UNKNOWN } from '../../constants';
 import { Customer } from './customer.entity';
+import { Movement } from 'src/movements/entities/movement.entity';
 
 @Entity({ name: 'warehouses' })
 @ObjectType()
@@ -24,16 +25,22 @@ export class Warehouse {
     @Field({ description: 'Warehouse type' })
     type: string;
 
-    @Column({
-        type: 'int'
-    })
+    @Column({ type: 'int' })
     @Field({ description: 'Warehouse size' })
     size: number;
 
-    @Column()
+    @Column({ type: 'uuid' })
     @Field({ description: 'Warehouse owner id' })
     customerId: string;
 
     @Field((type) => Customer)
     customer?: Customer;
+
+    @OneToMany((type) => Movement, (movement) => movement.exportedWarehouse)
+    @Field()
+    exportedMovements: Movement[];
+
+    @OneToMany((type) => Movement, (movement) => movement.importedWarehouse)
+    @Field()
+    importedMovements: Movement[];
 }

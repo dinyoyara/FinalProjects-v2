@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 
 import { config } from '../db/config';
+import { MovementsModule } from './movements/movements.module';
+import { Movement } from './movements/entities/movement.entity';
 import { WarehousesModule } from './warehouses/warehouses.module';
 import { Warehouse } from './warehouses/entities/warehouse.entity';
 
@@ -12,7 +14,7 @@ import { Warehouse } from './warehouses/entities/warehouse.entity';
     imports: [
         TypeOrmModule.forRoot({
             ...config,
-            entities: [Warehouse]
+            entities: [Warehouse, Movement]
         }),
         GraphQLModule.forRoot<ApolloFederationDriverConfig>({
             driver: ApolloFederationDriver,
@@ -21,7 +23,8 @@ import { Warehouse } from './warehouses/entities/warehouse.entity';
         ConfigModule.forRoot({
             isGlobal: true
         }),
-        WarehousesModule
+        WarehousesModule,
+        MovementsModule
     ]
 })
 export class AppModule {}

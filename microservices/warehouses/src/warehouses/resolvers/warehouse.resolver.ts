@@ -6,10 +6,15 @@ import { CreateWarehouseInput } from '../dto/create-warehouse.input';
 import { UpdateWarehouseInput } from '../dto/update-warehouse.input';
 import { Customer } from '../entities/customer.entity';
 import { CurrentUserId } from '../../decorators/current-user.decorator';
+import { MovementsService } from 'src/movements/movements.service';
+import { Movement } from 'src/movements/entities/movement.entity';
 
 @Resolver(() => Warehouse)
 export class WarehousesResolver {
-    constructor(private readonly warehouseService: WarehousesService) {}
+    constructor(
+        private readonly warehouseService: WarehousesService,
+        private readonly movementsService: MovementsService
+    ) {}
 
     @Mutation(() => Warehouse)
     createWarehouse(@Args('createWarehouseInput') input: CreateWarehouseInput, @CurrentUserId() customerId: string) {
@@ -42,5 +47,15 @@ export class WarehousesResolver {
             _typeName: 'Customer',
             id: warehouse.customerId
         };
+    }
+
+    @ResolveField(() => [Movement])
+    exportedMovements(@Parent() warehouse: Warehouse) {
+        return this.movementsService.findAllExportedByWarehouseAsync(warehouse.id);
+    }
+
+    @ResolveField(() => [Movement])
+    importedMovements(@Parent() warehouse: Warehouse) {
+        return this.movementsService.findAllImportedByWarehouseAsync(warehouse.id);
     }
 }
