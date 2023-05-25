@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 
 import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
@@ -21,5 +21,10 @@ export class ProductsResolver {
     @Query(() => Product, { name: 'product' })
     findOne(@Args('id') id: string) {
         return this.productsService.findOne(id);
+    }
+
+    @ResolveReference()
+    resolveReference(reference: { _typename: string; id: string }): Promise<Product> {
+        return this.productsService.findOne(reference.id);
     }
 }
