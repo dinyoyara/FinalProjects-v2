@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { InputProps } from "./types";
-
 const StyledTitle = styled("div")`
   width: 100%;
   font-size: 20px;
