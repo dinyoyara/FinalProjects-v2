@@ -15,9 +15,9 @@ import { authContext } from './auth.context';
             gateway: {
                 supergraphSdl: new IntrospectAndCompose({
                     subgraphs: [
-                        { name: 'customers', url: 'http://localhost:3001/graphql' },
-                        { name: 'warehouses', url: 'http://localhost:3004/graphql' },
-                        { name: 'products', url: 'http://localhost:3003/graphql' }
+                        { name: 'customers', url: 'http://localhost:4001/graphql' },
+                        { name: 'warehouses', url: 'http://localhost:4002/graphql' },
+                        { name: 'products', url: 'http://localhost:4003/graphql' }
                     ]
                 }),
                 buildService({ url }) {
