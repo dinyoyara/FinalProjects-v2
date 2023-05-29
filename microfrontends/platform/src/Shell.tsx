@@ -1,18 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import Header from "./header";
+import { useNavigate, Outlet } from "react-router-dom";
+import Header from "./components/header";
 
-const Platform = () => {
+const Shell = () => {
   const navigate = useNavigate();
   const handleNavigation = (path: string) => {
     navigate(path);
   };
 
   return (
-    <div>
+    <>
       <Header handleNavigation={handleNavigation} />
-      <h1>Help</h1>
-    </div>
+      <Outlet />
+    </>
   );
 };
 
-export default Platform;
+export default Shell;

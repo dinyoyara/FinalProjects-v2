@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import NavElement from "./navElement";
 import StyledHeader from "./styles.css";
 import { StyledTitle } from "./styles.css";
-import useCustomerContext from "../../context/useCustomer";
+import useCustomer from "../../context/useCustomer";
 
 interface Props {
   handleNavigation: (path: string) => void;
 }
 
 const Header: FC<Props> = ({ handleNavigation }) => {
-  const { customer, logout } = useCustomerContext();
+  const { customer, logout } = useCustomer();
   const navigate = useNavigate();
 
   const handleLogout = () => {

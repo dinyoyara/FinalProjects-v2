@@ -1,12 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Platform from "./components/Platform.tsx";
-import { BrowserRouter } from "react-router-dom";
+import Platform from "./Platform.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Platform />
-    </BrowserRouter>
+    <Platform />
   </React.StrictMode>
 );
