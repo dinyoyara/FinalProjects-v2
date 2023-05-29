@@ -25,5 +25,12 @@ const StyledLink = styled("div")`
   color: blue;
   cursor: pointer;
 `;
+const StyledError = styled("div")`
+    margin-top:5px
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    color: red;
+`;
 
-export { StyledGreeting, StyledAuthForm, StyledLink };
+export { StyledGreeting, StyledAuthForm, StyledLink, StyledError };
