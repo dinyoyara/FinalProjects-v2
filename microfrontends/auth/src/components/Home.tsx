@@ -4,7 +4,7 @@ import LoginForm from "./loginForm";
 import RegisterForm from "./registerForm";
 import { StyledGreeting, StyledLink } from "./styles.css";
 
-const App = () => {
+const Home = () => {
   const [showLogin, setShowLogin] = useState(true);
   const customer = null;
 
@@ -33,4 +33,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
