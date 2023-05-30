@@ -15,7 +15,7 @@ export default defineConfig({
       remotes: {
         "app-shared": "http://localhost:3010/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "@apollo/client", "graphql"],
     }),
   ],
   server: {
