@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { CustomerContext } from "./customer";
 
-function useCustomerContext() {
+function useCustomer() {
   return useContext(CustomerContext);
 }
 
-export default useCustomerContext;
+export default useCustomer;
