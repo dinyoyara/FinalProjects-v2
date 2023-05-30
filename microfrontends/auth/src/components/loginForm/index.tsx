@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
 
+import { SIGNIN_MUTATION } from "../../graphql/singin.mutation";
 import Form from "app-shared/Form";
 import { isEmailValid } from "../helpers";
 import { StyledAuthForm, StyledError } from "../styles.css";
-import { signinAsync } from "../../services/auth.service";
+import { setToken } from "../../services/storage.service";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +18,10 @@ const LoginForm = () => {
   });
   const [signInError, setSignInError] = useState("");
 
+  const [singin] = useMutation(SIGNIN_MUTATION, {
+    variables: { input: { email, password } },
+  });
+
   useEffect(() => {
     checkFormIsValid();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,7 +29,7 @@ const LoginForm = () => {
 
   const validateField = (fieldName: string, value: string) => {
     const currentErrors = { ...fieldsErrors };
-    //currentErrors[fieldName] = '';
+    currentErrors[fieldName as keyof typeof currentErrors] = "";
     switch (fieldName) {
       case "email":
         if (!isEmailValid(value))
@@ -47,7 +53,8 @@ const LoginForm = () => {
   };
 
   const submitHandler = async () => {
-    signinAsync(email, password);
+    const result = await singin();
+    setToken(result.data.singin.token);
   };
 
   const handleOnChange = (
