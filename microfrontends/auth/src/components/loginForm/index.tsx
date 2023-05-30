@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 
-import { SIGNIN_MUTATION } from "../../graphql/singin.mutation";
 import Form from "app-shared/Form";
 import { isEmailValid } from "../helpers";
-import { StyledAuthForm, StyledError } from "../styles.css";
+import { EMPTY_STRING } from "../../constants";
+import { SINGIN_MUTATION } from "../../graphql/mutations";
 import { setToken } from "../../services/storage.service";
+import { StyledAuthForm, StyledError } from "../styles.css";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(EMPTY_STRING);
+  const [password, setPassword] = useState(EMPTY_STRING);
 
   const [formIsValid, setFormIsValid] = useState(false);
   const [fieldsErrors, setFieldsErrors] = useState({
-    email: "",
-    password: "",
+    email: EMPTY_STRING,
+    password: EMPTY_STRING,
   });
-  const [signInError, setSignInError] = useState("");
+  const [signInError, setSignInError] = useState(EMPTY_STRING);
 
-  const [singin] = useMutation(SIGNIN_MUTATION, {
+  const [singin] = useMutation(SINGIN_MUTATION, {
     variables: { input: { email, password } },
   });
 
@@ -29,7 +30,7 @@ const LoginForm = () => {
 
   const validateField = (fieldName: string, value: string) => {
     const currentErrors = { ...fieldsErrors };
-    currentErrors[fieldName as keyof typeof currentErrors] = "";
+    currentErrors[fieldName as keyof typeof currentErrors] = EMPTY_STRING;
     switch (fieldName) {
       case "email":
         if (!isEmailValid(value))
@@ -47,8 +48,9 @@ const LoginForm = () => {
 
   const checkFormIsValid = () => {
     const validValues =
-      fieldsErrors.email === "" && fieldsErrors.password === "";
-    const notEmptyValues = email !== "" && password !== "";
+      fieldsErrors.email === EMPTY_STRING &&
+      fieldsErrors.password === EMPTY_STRING;
+    const notEmptyValues = email !== EMPTY_STRING && password !== EMPTY_STRING;
     setFormIsValid(validValues && notEmptyValues);
   };
 
@@ -64,7 +66,7 @@ const LoginForm = () => {
   ) => {
     const value = (event.target as HTMLInputElement).value;
     setter(value);
-    setSignInError("");
+    setSignInError(EMPTY_STRING);
     validateField(fieldName, value);
   };
 
