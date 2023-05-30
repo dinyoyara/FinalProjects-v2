@@ -33,11 +33,7 @@ const Platform = () => {
     )
   );
 
-  return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default Platform;
