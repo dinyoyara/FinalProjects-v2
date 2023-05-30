@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import LoginForm from "./loginForm";
 import RegisterForm from "./registerForm";
-import { getToken } from "../services/storage.service";
 import { StyledGreeting, StyledLink } from "./styles.css";
+import { AppProps } from "../type";
 
-const Home = () => {
-  const [customer] = useState(getToken());
+const Home: FC<AppProps> = ({ customer }) => {
   const [showLogin, setShowLogin] = useState(true);
 
   const changeActiveForm = () => {
@@ -21,7 +20,7 @@ const Home = () => {
   return (
     <>
       {customer ? (
-        <StyledGreeting>Welcome, Customer</StyledGreeting>
+        <StyledGreeting>Welcome, {customer.name}</StyledGreeting>
       ) : (
         <>
           {form}
